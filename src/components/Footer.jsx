@@ -4,11 +4,9 @@ import React from "react";
 export default function Footer() {
   return (
     <footer>
-      <span>
-        Minty Yard
-        <br />
-        Copyright &copy; 2019{" "}
-      </span>
+        Volcano Explorer
+        <br/>
+        Created by Drayko
     </footer>
   );
 }
