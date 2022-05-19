@@ -1,50 +1,41 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import { useNavigate} from "react-router-dom";
 
-import { Button, Badge } from "reactstrap";
+import { Button, Badge, Input } from "reactstrap";
 
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
+import { getVolcanoDataByQuery } from "../api";
+
 export default function VolcanoList() {
-  const [rowData, setRowData] = useState([]);
   const navigate = useNavigate();
+  const {rowData, error} = getVolcanoDataByQuery();
 
   const columns = [
-    { headerName: "Title", field: "title" },
-    { headerName: "Author", field: "author", sortable: true },
-    { headerName: "Edition Count", field: "editionCount", sortable: true },
-    { headerName: "Book ID", field: "id" },
+    { headerName: "Name", field: "name", sortable: true },
+    { headerName: "Region", field: "region" },
+    { headerName: "Subregion", field: "subregion", sortable: true },
   ];
-
-  useEffect(() => {
-    fetch("http://openlibrary.org/subjects/drama.json?published_in=2000")
-      .then(res => res.json())
-      .then(data => data.works)
-      .then(works =>
-        works.map(book => {
-          return {
-            title: book.title,
-            author: book.authors[0].name,
-            editionCount: book.edition_count,
-            id: book.cover_id
-          };
-        })
-        )
-        .then(books => setRowData(books));
-  })
 
 
   return (
   <div className= "container">
       <h1>Book Catalouge</h1>
       <p><Badge color="success">{rowData.length}</Badge> Books published in 2000 in the Drama catageory</p>
+
+      <Input
+        type="select"
+      >
+        <option value={3}>Test</option>
+        <option value={3}>Test 2</option>
+      </Input>
       <div 
         className="ag-theme-balham"
         style={{
           height: "300px",
-          width: "800px"
+          width: "600px"
         }}
       >
         <AgGridReact
@@ -52,19 +43,19 @@ export default function VolcanoList() {
           rowData={rowData}
           pagination= {true} 
           paginationPageSize= {7}
-          onRowClicked={(row) => navigate(`./volcano?title=${row.data.title}`)}
+          onRowClicked={(row) => navigate(`./volcano?title=${row.data.name}`)}
         />
-
-        <Button
-          color="info"
-          size="sm"
-          className="mt-3"
-          href="http://openlibrary.org/subjects/drama.json?published_in=2000"
-          target="_blank"
-          >
-            Go to Open Library API
-          </Button>
       </div>
+
+      <Button
+        color="info"
+        size="sm"
+        className="mt-3"
+        href="http://openlibrary.org/subjects/drama.json?published_in=2000"
+        target="_blank"
+        >
+          Go to Open Library API
+        </Button>
   </div>
   );
 }
