@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from "react";
 
+import { Button, Badge } from "reactstrap";
+
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
@@ -33,22 +35,33 @@ export default function VolcanoList() {
 
 
   return (
-  <div>
-    <h2>Volcano</h2>
-    <div 
-      className="ag-theme-balham"
-      style={{
-        height: "300px",
-        width: "800px"
-      }}
-    >
-      <AgGridReact
-        columnDefs={columns}
-        rowData={rowData}
-        pagination= {true} 
-        paginationPageSize= {7}
-      />
-    </div>
+  <div className= "container">
+      <h1>Book Catalouge</h1>
+      <p><Badge color="success">{rowData.length}</Badge> Books published in 2000 in the Drama catageory</p>
+      <div 
+        className="ag-theme-balham"
+        style={{
+          height: "300px",
+          width: "800px"
+        }}
+      >
+        <AgGridReact
+          columnDefs={columns}
+          rowData={rowData}
+          pagination= {true} 
+          paginationPageSize= {7}
+        />
+
+        <Button
+          color="info"
+          size="sm"
+          className="mt-3"
+          href="http://openlibrary.org/subjects/drama.json?published_in=2000"
+          target="_blank"
+          >
+            Go to Open Library API
+          </Button>
+      </div>
   </div>
   );
 }
