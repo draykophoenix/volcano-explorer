@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate} from "react-router-dom";
 
 import { Button, Badge, Input } from "reactstrap";
@@ -7,11 +7,14 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
-import { getVolcanoDataByQuery } from "../api";
+import { useCountries, getVolcanoDataByQuery } from "../api";
 
 export default function VolcanoList() {
   const navigate = useNavigate();
-  const {rowData, error} = getVolcanoDataByQuery();
+  const {rowData, volcanoError} = {rowData: [], volcanoError: null}; /*getVolcanoDataByQuery("Japan");*/ 
+  const {loading, countries, countryError} = useCountries();
+
+  //const [selectedCountry, setSelectedCountry] = useState('');
 
   const columns = [
     { headerName: "Name", field: "name", sortable: true },
@@ -25,12 +28,16 @@ export default function VolcanoList() {
       <h1>Book Catalouge</h1>
       <p><Badge color="success">{rowData.length}</Badge> Books published in 2000 in the Drama catageory</p>
 
-      <Input
-        type="select"
-      >
-        <option value={3}>Test</option>
-        <option value={3}>Test 2</option>
-      </Input>
+      {loading ? (
+        <p>Loading... </p>
+      ) : (
+          <Input type="select">
+          {countries.map((country) => (
+            <option>{country}</option>
+          ))}
+          </Input>
+      )}
+
       <div 
         className="ag-theme-balham"
         style={{
