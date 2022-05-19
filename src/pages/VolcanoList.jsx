@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { useNavigate} from "react-router-dom";
 
 import { Button, Badge } from "reactstrap";
 
@@ -8,6 +9,7 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
 export default function VolcanoList() {
   const [rowData, setRowData] = useState([]);
+  const navigate = useNavigate();
 
   const columns = [
     { headerName: "Title", field: "title" },
@@ -50,6 +52,7 @@ export default function VolcanoList() {
           rowData={rowData}
           pagination= {true} 
           paginationPageSize= {7}
+          onRowClicked={(row) => navigate(`./volcano?title=${row.data.title}`)}
         />
 
         <Button
