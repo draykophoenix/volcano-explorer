@@ -1,24 +1,27 @@
 import {useState, useEffect} from "react";
 
 export function useCountries () {
-    const [loading, setLoading] = useState (false);
-    const [countries, setCountries] = useState(["Algeria","Antarctica","Argentina","Armenia","Australia","Bolivia","Burma (Myanmar)","Cameroon"]);
+    const [loading, setLoading] = useState (true);
+    const [countries, setCountries] = useState([]);
 
     // Needs error handeling
-    // useEffect(() => {
-    //   getCountriesByQuery()
-    //   .then((countries => {
-    //     setCountries(countries);
-    //     //setLoading(false);
-    //   }))
-    // });
+    useEffect(() => {
+      getCountriesByQuery()
+      .then((countries => {
+        setCountries(countries);  
+      }))
+      .then(() => setLoading(false));
+    }, [] );
 
     return {loading, countries, error:null};
 }
 
 function getCountriesByQuery() {
   const url = `http://sefdb02.qut.edu.au:3001/countries`
-  return fetch(url).then(res => res.json())
+  return (
+    fetch(url)
+      .then(res => res.json())
+  )
 }
 
 export function useVolcanoData(country) {

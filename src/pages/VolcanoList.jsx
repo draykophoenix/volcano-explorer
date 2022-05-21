@@ -40,7 +40,7 @@ export default function VolcanoList() {
         </div>
       )}
 
-      <VolcanoTable selectedCountry= {selectedCountry}/>
+      {/* <VolcanoTable selectedCountry= {selectedCountry}/> */}
 
       <Button
         color="info"
