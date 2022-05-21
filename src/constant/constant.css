@@ -1,19 +1,19 @@
 body {
-    background: seashell;
+    background: var(--ashwhite);
     font-family: Arial, Helvetica, sans-serif;
   }
   
   header {
-    background: #2e8b57;
-    color: #fff;
+    background: var(--lavared);
+    color: var(--ashwhite);
     padding: 10px 30px;
   }
   
   footer {
-    background: #1e1e1e;
+    background: var(--rockgrey);
     padding: 20px;
     text-align: center;
-    color: seashell;
+    color: var(--ashwhite);
   }
   
   nav ul li a {

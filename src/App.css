@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
+:root {
+  --rockgrey: #201a1a;
+  --ashwhite: #cccdcf;
+  --lavared: #8b3327;
+  --lavaorange: #8b3327;
+}
+
 /* Simple browser reset */
 * {
   box-sizing: border-box;

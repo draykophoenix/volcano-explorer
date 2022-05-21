@@ -6,7 +6,7 @@ export function useCountries () {
 
     // Needs error handeling
     useEffect(() => {
-      getCountriesByQuery()
+      getCountries()
       .then((countries => {
         setCountries(countries);  
       }))
@@ -16,7 +16,7 @@ export function useCountries () {
     return {loading, countries, error:null};
 }
 
-function getCountriesByQuery() {
+function getCountries() {
   const url = `http://sefdb02.qut.edu.au:3001/countries`
   return (
     fetch(url)
@@ -24,23 +24,24 @@ function getCountriesByQuery() {
   )
 }
 
-export function useVolcanoData(country) {
+export function useVolcanoList(country) {
   const [loading, setLoading] = useState(true);
-  const [volcanoData, setVolcanoData] = useState([]);
+  const [volcanoList, setVolcanoList] = useState([]);
 
   useEffect(() => {
     if (country != "") {
-      getVolcanoDataByQuery(country)
-        .then((volcanoData) => {
-          setVolcanoData(volcanoData);
+      getVolcanoListByQuery(country)
+        .then((volcanoList) => {
+          setVolcanoList(volcanoList);
         })
+        .then(() => setLoading(false));
     }
   }, [country]);
 
-  return { loading, volcanoData, error:null };
+  return { loading, volcanoList, error:null };
 }
 
-function getVolcanoDataByQuery(country) {
+function getVolcanoListByQuery(country) {
     const url = `http://sefdb02.qut.edu.au:3001/volcanoes/?country=${country}`
 
     return(
@@ -49,12 +50,39 @@ function getVolcanoDataByQuery(country) {
         .then(data =>
           data.map(volcano => {
             return {
+              id: volcano.id,
               name: volcano.name,
               region: volcano.region,
               subregion: volcano.subregion,
             };
           })
         )
+    )
+}
+
+export function useVolcanoData(id) {
+  const [loading, setLoading] = useState(true);
+  const [volcanoData, setVolcanoData] = useState([]);
+
+  useEffect(() => {
+    if (id != "") {
+      getVolcanoDataByQuery(id)
+        .then((volcanoData) => {
+          setVolcanoData(volcanoData);
+        })
+        .then(() => setLoading(false));
+    }
+  }, [id]);
+
+  return { loading, volcanoData, error:null };
+}
+
+function getVolcanoDataByQuery(id) {
+    const url = `http://sefdb02.qut.edu.au:3001/volcano/${id}`
+
+    return(
+      fetch(url)
+        .then(res => res.json())
     )
 }
 

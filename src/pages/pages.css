@@ -12,7 +12,7 @@
   .hero {
     min-height: 800px;
     text-align: center;
-    background-image: url("../../public/img/dining.jpg");
+    background-image: url("../../public/img/volcano.jpg"); /*Photo by Toby Elliott on Unsplash*/
     background-size: cover;
   }
   

@@ -7,7 +7,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
-import { useCountries, getVolcanoDataByQuery, useVolcanoData } from "../api";
+import { useCountries, useVolcanoList } from "../api";
 
 export default function VolcanoList() {
   // Countries for the input box 
@@ -60,69 +60,39 @@ export default function VolcanoList() {
 
   function VolcanoTable ( {selectedCountry = []} ) {
   // Volcano data for rows in the volcano table
-  const {volcanoDataLoading, volcanoData, volcanoDataError} = useVolcanoData(selectedCountry);
+  const {volcanoListLoading, volcanoList, volcanoListError} = useVolcanoList(selectedCountry);
   // Allows table to navigate with React Router
   const navigate = useNavigate();
 
   const columns = [
-    { headerName: "Name", field: "name", sortable: true },
-    { headerName: "Region", field: "region" },
-    { headerName: "Subregion", field: "subregion", sortable: true },
+    { headerName: "ID", field:"id", sortable: true, width: 70, filter: "agNumberColumnFilter"},
+    { headerName: "Name", field: "name", sortable: true, filter: "agTextColumnFilter" },
+    { headerName: "Region", field: "region", sortable: true },
+    { headerName: "Subregion", field: "subregion", sortable: true, width:230, filter: "agTextColumnFilter" },
   ];
 
   return (
     <div className= "container">
 
     <p>
-      <Badge color="success">{volcanoData.length}</Badge> Books published in 2000 in the Drama catageory
+      <Badge color="success">{volcanoList.length}</Badge> Books published in 2000 in the Drama catageory
     </p>
 
     <div 
       className="ag-theme-balham"
       style={{
         height: "300px",
-        width: "600px"
+        width: "700px"
       }}
     >
       <AgGridReact
         columnDefs={columns}
-        rowData={volcanoData}
+        rowData={volcanoList}
         pagination= {true} 
         paginationPageSize= {7}
-        onRowClicked={(row) => navigate(`./volcano?title=${row.data.name}`)}
+        onRowClicked={(row) => navigate(`./volcano?id=${row.data.id}`)}
       />
     </div>
   </div>
   )
 }
-
-    {/* {loading ? (
-      <p>Loading... </p>
-    ) : (
-        <Input 
-          type="select"
-          value={selectedCountry}
-          onChange={(entry) => setSelectedCountry(entry.target.value)}
-        >
-        {countries.map((country) => (
-          <option>{country}</option>
-        ))}
-        </Input>
-    )} */}
-
-    // return (
-    //   <div className= "container">
-    //   {loading ? (
-    //     <p>Loading... </p>
-    //   ) : (
-    //     <form 
-    //       onSubmit={(event) => {
-    //         event.preventDefault();
-    //         console.log(event.target.elements.country.value);
-    //       }}
-    //     >
-    //       <label htmlFor="country">Country:</label>
-    //       <input id="country" name="country" type="text" />
-    //       <button type="submit">Submit</button>
-    //     </form>
-    //   )}
