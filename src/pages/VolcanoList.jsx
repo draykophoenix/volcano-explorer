@@ -11,7 +11,7 @@ import { useCountries, getVolcanoDataByQuery, useVolcanoData } from "../api";
 
 export default function VolcanoList() {
   // Countries for the input box 
-  const {countriesLoading, countries, countriesError} = useCountries();
+  const {loading: countriesLoading, countries, error: countriesError} = useCountries();
   //
   const [selectedCountry, setSelectedCountry] = useState("");
 
@@ -33,14 +33,15 @@ export default function VolcanoList() {
               setSelectedCountry(event.target.value); 
             }} 
           >
+            <option value={""}></option>
             {countries.map((country) => (
-            <option>{country}</option>
+            <option key={country}>{country}</option>
             ))}
           </Input>
         </div>
       )}
 
-      {/* <VolcanoTable selectedCountry= {selectedCountry}/> */}
+      <VolcanoTable selectedCountry= {selectedCountry}/>
 
       <Button
         color="info"
@@ -57,7 +58,7 @@ export default function VolcanoList() {
 
   
 
-  function VolcanoTable ( {selectedCountry} ) {
+  function VolcanoTable ( {selectedCountry = []} ) {
   // Volcano data for rows in the volcano table
   const {volcanoDataLoading, volcanoData, volcanoDataError} = useVolcanoData(selectedCountry);
   // Allows table to navigate with React Router

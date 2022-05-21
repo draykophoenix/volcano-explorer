@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 
 export function useCountries () {
-    const [loading, setLoading] = useState (true);
+    const [loading, setLoading] = useState(true);
     const [countries, setCountries] = useState([]);
 
     // Needs error handeling
@@ -10,7 +10,7 @@ export function useCountries () {
       .then((countries => {
         setCountries(countries);  
       }))
-      .then(() => setLoading(false));
+     .then(() => setLoading(false));
     }, [] );
 
     return {loading, countries, error:null};
@@ -29,10 +29,12 @@ export function useVolcanoData(country) {
   const [volcanoData, setVolcanoData] = useState([]);
 
   useEffect(() => {
-    getVolcanoDataByQuery(country)
-      .then((volcanoData) => {
-        setVolcanoData(volcanoData);
-      })
+    if (country != "") {
+      getVolcanoDataByQuery(country)
+        .then((volcanoData) => {
+          setVolcanoData(volcanoData);
+        })
+    }
   }, [country]);
 
   return { loading, volcanoData, error:null };
