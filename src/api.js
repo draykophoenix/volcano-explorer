@@ -22,25 +22,35 @@ function getCountriesByQuery() {
   return fetch(url).then(res => res.json())
 }
 
-export function getVolcanoDataByQuery(country) {
-    const [rowData, setRowData] = useState([]);
+export function useVolcanoData() {
+  const [loading, setLoading] = useState(true);
+  const [rowData, setRowData] = useState([]);
+
+  useEffect(() => {
+    getVolcanoDataByQuery("Japan")
+      .then((rowData) => {
+        setRowData(rowData);
+      })
+  }, []);
+
+  return { loading, rowData, error:null };
+}
+
+function getVolcanoDataByQuery(country) {
     const url = `http://sefdb02.qut.edu.au:3001/volcanoes/?country=${country}`
 
-    useEffect(() => {
-        fetch(url)
-          .then(res => res.json())
-          .then(data =>
-            data.map(volcano => {
-              return {
-                name: volcano.name,
-                region: volcano.region,
-                subregion: volcano.subregion,
-              };
-            })
-            )
-            .then(volcano => setRowData(volcano));
-      }, [])
-
-      return {rowData, error:null}
+    return(
+      fetch(url)
+        .then(res => res.json())
+        .then(data =>
+          data.map(volcano => {
+            return {
+              name: volcano.name,
+              region: volcano.region,
+              subregion: volcano.subregion,
+            };
+          })
+        )
+    )
 }
 

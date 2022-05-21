@@ -7,7 +7,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham.css";
 
-import { useCountries, getVolcanoDataByQuery } from "../api";
+import { useCountries, getVolcanoDataByQuery, useVolcanoData } from "../api";
 
 export default function VolcanoList() {
   return (
@@ -31,13 +31,13 @@ export default function VolcanoList() {
 
   function VolcanoTable () {
   // Volcano data for rows in the volcano table
-  const {rowData, volcanoError} = getVolcanoDataByQuery("Japan");
+  const [{volcanoDataLoading, rowData: volcanoData, volcanoDataError}] = useVolcanoData();
   // Countries for the input box 
-  const {loading, countries, countryError} = useCountries();
+  const {countriesLoading, countries, countriesError} = useCountries();
   // Allows table to navigate with React Router
   const navigate = useNavigate();
 
-  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedCountry, setSelectedCountry] = useState("");
 
   const columns = [
     { headerName: "Name", field: "name", sortable: true },
@@ -47,23 +47,24 @@ export default function VolcanoList() {
 
   return (
     <div className= "container">
-    {loading ? (
+    {countriesLoading ? (
       <p>Loading... </p>
     ) : (
-      <form 
-        onSubmit={(event) => {
-          event.preventDefault();
-          console.log(event.target.elements.country.value);
-        }}
-      >
+      <div>
         <label htmlFor="country">Country:</label>
-        <input id="country" name="country" type="text" />
-        <button type="submit">Submit</button>
-      </form>
+        <input 
+          id="country"
+          name="country"
+          type="text"
+          value={selectedCountry}
+          onChange={(event) => {
+            setSelectedCountry(event.target.value); 
+          }} />
+      </div>
     )}
 
     <p>
-      <Badge color="success">{rowData.length}</Badge> Books published in 2000 in the Drama catageory
+      <Badge color="success">{volcanoData.length}</Badge> Books published in 2000 in the Drama catageory
     </p>
 
     <div 
@@ -75,7 +76,7 @@ export default function VolcanoList() {
     >
       <AgGridReact
         columnDefs={columns}
-        rowData={rowData}
+        rowData={volcanoData}
         pagination= {true} 
         paginationPageSize= {7}
         onRowClicked={(row) => navigate(`./volcano?title=${row.data.name}`)}
@@ -98,3 +99,20 @@ export default function VolcanoList() {
         ))}
         </Input>
     )} */}
+
+    // return (
+    //   <div className= "container">
+    //   {loading ? (
+    //     <p>Loading... </p>
+    //   ) : (
+    //     <form 
+    //       onSubmit={(event) => {
+    //         event.preventDefault();
+    //         console.log(event.target.elements.country.value);
+    //       }}
+    //     >
+    //       <label htmlFor="country">Country:</label>
+    //       <input id="country" name="country" type="text" />
+    //       <button type="submit">Submit</button>
+    //     </form>
+    //   )}
