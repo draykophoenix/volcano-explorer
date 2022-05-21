@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate} from "react-router-dom";
 
-import { Button, Badge, Input } from "reactstrap";
+import { Button, Badge, Input, Label, FormGroup, Form } from "reactstrap";
 
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-balham.css";
+import "ag-grid-community/dist/styles/ag-theme-balham-dark.css";
 
 import { useCountries, useVolcanoList } from "../api";
 
@@ -16,35 +16,40 @@ export default function VolcanoList() {
   const [selectedCountry, setSelectedCountry] = useState("");
 
   return (
+  <div>
+    <h1>Book Catalouge</h1>
     <div className="container">
-      <h1>Book Catalouge</h1>
 
       {countriesLoading ? (
         <p>Loading... </p>
       ) : (
-        <div>
-          <label htmlFor="country">Country: </label>
-          <Input 
-            id="country"
-            name="country"
-            type="select"
-            value={selectedCountry}
-            onChange={(event) => {
-              setSelectedCountry(event.target.value); 
-            }} 
-          >
-            <option value={""}></option>
-            {countries.map((country) => (
-            <option key={country}>{country}</option>
-            ))}
-          </Input>
-        </div>
+        <Form inline>
+          <FormGroup floating>
+            <Input
+              className="input"
+              id="country"
+              name="country"
+              type="select"
+              value={selectedCountry}
+              placeholder="Country"
+              onChange={(event) => {
+                setSelectedCountry(event.target.value); 
+              }} 
+            >
+              <option value={""}></option>
+              {countries.map((country) => (
+              <option key={country}>{country}</option>
+              ))}
+            </Input>
+            <Label for="country">Country</Label>
+          </FormGroup>
+        </Form>
       )}
 
       <VolcanoTable selectedCountry= {selectedCountry}/>
 
       <Button
-        color="info"
+        color="secondary"
         size="sm"
         className="mt-3"
         href="http://openlibrary.org/subjects/drama.json?published_in=2000"
@@ -52,6 +57,7 @@ export default function VolcanoList() {
         >
           Go to Open Library API
       </Button>
+  </div>
   </div>
   );
 }
@@ -79,7 +85,7 @@ export default function VolcanoList() {
     </p>
 
     <div 
-      className="ag-theme-balham"
+      className="ag-theme-balham-dark"
       style={{
         height: "300px",
         width: "700px"

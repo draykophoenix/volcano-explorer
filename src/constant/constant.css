@@ -1,46 +1,56 @@
-body {
-    background: var(--ashwhite);
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  header {
-    background: var(--lavared);
-    color: var(--ashwhite);
-    padding: 10px 30px;
-  }
-  
-  footer {
-    background: var(--rockgrey);
-    padding: 20px;
-    text-align: center;
-    color: var(--ashwhite);
-  }
-  
-  nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    display: block;
-    padding: 10px 15px;
-    border-radius: 3px;
-    transition: 0.3s ease all;
-  }
-  
-  nav ul li {
-    display: inline-block;
-  }
-  
-  nav ul {
-    list-style: none;
-    margin: 0;
-  }
-  
-  nav {
-    width: 50%;
-    display: inline-block;
-    text-align: right;
-  }
-  
-  nav ul li a:hover {
-    background: #444;
-  }
+header {
+  background: var(--lavared);
+  color: var(--ashwhite);
+  padding: 10px 30px;
+}
+
+footer {
+  background: var(--rockgrey);
+  padding: 20px;
+  text-align: center;
+  color: var(--ashwhite);
+  position:absolute;
+  bottom:0;
+  width:100%; 
+}
+
+nav ul li a {
+  color: whitesmoke;
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+  border-radius: 3px;
+  transition: 0.3s ease all;
+}
+
+nav ul li {
+  display: inline-block;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+}
+
+nav {
+  width: 50%;
+  display: inline-block;
+  text-align: right;
+}
+
+nav ul li a:hover {
+  background: var(--lavaorange);
+  color: white;
+}
       
+#icon {
+display: inline-block;
+width: 49%;
+}
+
+#icon img {
+  width: 50px;
+  border-radius: 3px;
+  margin-right: 8px;
+  vertical-align: middle;
+}

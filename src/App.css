@@ -3,13 +3,15 @@
 :root {
   --rockgrey: #201a1a;
   --ashwhite: #cccdcf;
+  --ashgrey: #717073;
   --lavared: #8b3327;
-  --lavaorange: #8b3327;
+  --lavaorange: #ce8642;
 }
 
 /* Simple browser reset */
 * {
   box-sizing: border-box;
+
 }
 
 html,
@@ -20,37 +22,19 @@ body {
   font-size: 16px;
 }
 
-/* Icon */
-#icon {
-  display: inline-block;
-  width: 49%;
+.App {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--rockgrey);
 }
 
-#icon img {
-  width: 50px;
-  border-radius: 3px;
-  margin-right: 8px;
-  vertical-align: middle;
+.content {
+  min-height: 100vh;
+  padding-bottom: 2.5rem;    /* Footer height */
+  background-color: var(--ashwhite);
 }
 
-/* Basic site section */
-.features {
-  padding-bottom: 50px;
-  padding-top: 50px;
-  width: 80%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.features__header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.features__header h2 {
-  font-size: 30px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-weight: 300;
-  color: #777;
+body {
+  background: var(--rockgrey);
+  font-family: Arial, Helvetica, sans-serif;
 }
