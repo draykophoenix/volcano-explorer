@@ -13,22 +13,25 @@ export default function Volcano() {
     const {loading: volcanoDataLoading, volcanoData, error: volcanoDataError} = useVolcanoData(id);
 
     return (
-        <div className="container">
+        <div>
+        <h1>{volcanoData.name}</h1>
+            <div className="container">
 
-            {volcanoDataLoading ? (
-                <p>Loading ...</p>
-            ) : (
-                <VolcanoInformation {...volcanoData}/>
-            ) }
+                {volcanoDataLoading ? (
+                    <p>Loading ...</p>
+                ) : (
+                    <VolcanoInformation {...volcanoData}/>
+                ) }
 
-            <Button
-                color="info"
-                size="sm"
-                className="mt-3"
-                onClick={() => navigate("../volcano-list")}
-            >
-                Back
-            </Button>
+                <Button
+                    color="secondary"
+                    size="sm"
+                    className="mt-3"
+                    onClick={() => navigate("../volcano-list")}
+                >
+                    Back
+                </Button>
+            </div>
         </div>
     );
 }
@@ -36,7 +39,6 @@ export default function Volcano() {
 function VolcanoInformation ({ name, country, region, subregion, last_eruption, summit, elevation}) {
     return(
         <div>
-            <h1>{name}</h1>
             <ListGroup type="unstyled">
                 <ListGroupItem>Country: {country}</ListGroupItem>
                 <ListGroupItem>Region: {region}</ListGroupItem>
