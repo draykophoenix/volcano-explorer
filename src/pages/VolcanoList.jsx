@@ -10,11 +10,37 @@ import "ag-grid-community/dist/styles/ag-theme-balham.css";
 import { useCountries, getVolcanoDataByQuery, useVolcanoData } from "../api";
 
 export default function VolcanoList() {
+  // Countries for the input box 
+  const {countriesLoading, countries, countriesError} = useCountries();
+  //
+  const [selectedCountry, setSelectedCountry] = useState("");
+
   return (
     <div className="container">
       <h1>Book Catalouge</h1>
 
-      <VolcanoTable/>
+      {countriesLoading ? (
+        <p>Loading... </p>
+      ) : (
+        <div>
+          <label htmlFor="country">Country: </label>
+          <Input 
+            id="country"
+            name="country"
+            type="select"
+            value={selectedCountry}
+            onChange={(event) => {
+              setSelectedCountry(event.target.value); 
+            }} 
+          >
+            {countries.map((country) => (
+            <option>{country}</option>
+            ))}
+          </Input>
+        </div>
+      )}
+
+      <VolcanoTable selectedCountry= {selectedCountry}/>
 
       <Button
         color="info"
@@ -29,12 +55,11 @@ export default function VolcanoList() {
   );
 }
 
-  function VolcanoTable () {
-  const [selectedCountry, setSelectedCountry] = useState("");
+  
+
+  function VolcanoTable ( {selectedCountry} ) {
   // Volcano data for rows in the volcano table
   const {volcanoDataLoading, volcanoData, volcanoDataError} = useVolcanoData(selectedCountry);
-  // Countries for the input box 
-  const {countriesLoading, countries, countriesError} = useCountries();
   // Allows table to navigate with React Router
   const navigate = useNavigate();
 
@@ -46,21 +71,6 @@ export default function VolcanoList() {
 
   return (
     <div className= "container">
-    {countriesLoading ? (
-      <p>Loading... </p>
-    ) : (
-      <div>
-        <label htmlFor="country">Country: </label>
-        <input 
-          id="country"
-          name="country"
-          type="text"
-          value={selectedCountry}
-          onChange={(event) => {
-            setSelectedCountry(event.target.value); 
-          }} />
-      </div>
-    )}
 
     <p>
       <Badge color="success">{volcanoData.length}</Badge> Books published in 2000 in the Drama catageory

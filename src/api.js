@@ -2,15 +2,14 @@ import {useState, useEffect} from "react";
 
 export function useCountries () {
     const [loading, setLoading] = useState (false);
-    //const [countries, setCountries] = useState([]);
-
-    const countries = ["Algeria","Antarctica","Argentina","Armenia","Australia","Bolivia","Burma (Myanmar)","Cameroon"]
+    const [countries, setCountries] = useState(["Algeria","Antarctica","Argentina","Armenia","Australia","Bolivia","Burma (Myanmar)","Cameroon"]);
 
     // Needs error handeling
     // useEffect(() => {
-    //   getCountriesByQuery().then((countries => {
+    //   getCountriesByQuery()
+    //   .then((countries => {
     //     setCountries(countries);
-    //     setLoading(false);
+    //     //setLoading(false);
     //   }))
     // });
 
@@ -24,12 +23,12 @@ function getCountriesByQuery() {
 
 export function useVolcanoData(country) {
   const [loading, setLoading] = useState(true);
-  const [volcanoData, setRowData] = useState([]);
+  const [volcanoData, setVolcanoData] = useState([]);
 
   useEffect(() => {
     getVolcanoDataByQuery(country)
       .then((volcanoData) => {
-        setRowData(volcanoData);
+        setVolcanoData(volcanoData);
       })
   }, [country]);
 
