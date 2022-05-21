@@ -22,18 +22,18 @@ function getCountriesByQuery() {
   return fetch(url).then(res => res.json())
 }
 
-export function useVolcanoData() {
+export function useVolcanoData(country) {
   const [loading, setLoading] = useState(true);
-  const [rowData, setRowData] = useState([]);
+  const [volcanoData, setRowData] = useState([]);
 
   useEffect(() => {
-    getVolcanoDataByQuery("Japan")
-      .then((rowData) => {
-        setRowData(rowData);
+    getVolcanoDataByQuery(country)
+      .then((volcanoData) => {
+        setRowData(volcanoData);
       })
-  }, []);
+  }, [country]);
 
-  return { loading, rowData, error:null };
+  return { loading, volcanoData, error:null };
 }
 
 function getVolcanoDataByQuery(country) {

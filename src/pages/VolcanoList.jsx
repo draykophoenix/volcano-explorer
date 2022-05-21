@@ -30,14 +30,13 @@ export default function VolcanoList() {
 }
 
   function VolcanoTable () {
+  const [selectedCountry, setSelectedCountry] = useState("");
   // Volcano data for rows in the volcano table
-  const [{volcanoDataLoading, rowData: volcanoData, volcanoDataError}] = useVolcanoData();
+  const {volcanoDataLoading, volcanoData, volcanoDataError} = useVolcanoData(selectedCountry);
   // Countries for the input box 
   const {countriesLoading, countries, countriesError} = useCountries();
   // Allows table to navigate with React Router
   const navigate = useNavigate();
-
-  const [selectedCountry, setSelectedCountry] = useState("");
 
   const columns = [
     { headerName: "Name", field: "name", sortable: true },
@@ -51,7 +50,7 @@ export default function VolcanoList() {
       <p>Loading... </p>
     ) : (
       <div>
-        <label htmlFor="country">Country:</label>
+        <label htmlFor="country">Country: </label>
         <input 
           id="country"
           name="country"
