@@ -17,7 +17,7 @@ export default function VolcanoList() {
 
   return (
   <div>
-    <h1>Book Catalouge</h1>
+    <h1>Volcanos</h1>
     <div className="container">
 
       {countriesLoading ? (
@@ -52,10 +52,10 @@ export default function VolcanoList() {
         color="secondary"
         size="sm"
         className="mt-3"
-        href="http://openlibrary.org/subjects/drama.json?published_in=2000"
+        href="http://sefdb02.qut.edu.au:3001/"
         target="_blank"
         >
-          Go to Open Library API
+          Go to Volcano API
       </Button>
   </div>
   </div>
@@ -81,7 +81,7 @@ export default function VolcanoList() {
     <div className= "container">
 
     <p>
-      <Badge color="success">{volcanoList.length}</Badge> Books published in 2000 in the Drama catageory
+      <Badge color="secondary">{volcanoList.length}</Badge> &nbsp;Volcano{volcanoList.length === 1 ? "" : "s"} found in {selectedCountry}
     </p>
 
     <div 
