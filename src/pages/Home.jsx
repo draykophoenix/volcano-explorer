@@ -25,19 +25,19 @@ const Hero = () => (
 function Features() {
   const featuresData = [
     {
-      heading: "Organic & Ethical",
+      heading: "Discover",
       text:
-        "All of our ingredients are organically sourced from local producers.",
+        "...all the volcanoes that are out there",
     },
     {
-      heading: "Live Entertainment",
+      heading: "Explore",
       text:
-        "On the first Saturday of every month, enjoy free live jazz entertainment from local bands.",
+        "...data about volcanos. Hey, who knows, you might even find a new favourite volcano.",
     },
     {
-      heading: "Satisfaction guaranteed",
+      heading: "Register",
       text:
-        "Not happy with your meal? A full refund will be provided, no questions asked!",
+        "...with our site. Not happy with the data? A full refund will be provided, no questions asked!",
     }
   ];
 
