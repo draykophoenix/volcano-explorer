@@ -5,7 +5,7 @@ import { Input, Form, FormGroup, Label, Button } from "reactstrap";
 import { login } from "../auth";
 
 
-export default function Login() {
+export default function Login( {setInstance} ) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -46,7 +46,7 @@ export default function Login() {
             Email
           </Input>
         </FormGroup>
-        <Button onClick={() => login(email, password)}>Login</Button>
+        <Button onClick={() => login(email, password, setInstance)}>Login</Button>
       </Form>
       </div>
     </div>

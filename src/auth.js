@@ -1,6 +1,6 @@
 import { API_URL } from ".";
 
-export function login (email, password) {
+export function login (email, password, setInstance) {
     const url = `${API_URL}/user/login`;
 
     return fetch(url, {
@@ -10,8 +10,9 @@ export function login (email, password) {
     })
     .then(res => res.json())
     .then(res => {
-        localStorage.setItem("token", res.token);
-    });
+        localStorage.setItem("instance", { token: res.token, email: email });
+        setInstance({ token: res.token, email: email });
+    })
 }
 
 export function register (email, password) {

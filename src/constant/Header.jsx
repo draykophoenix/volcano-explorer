@@ -3,15 +3,10 @@ import React from "react";
 import Nav from "./Nav";
 
 // the header
-export default function Header() {
+export default function Header( { instance } ) {
   return (
     <header>
-      {/* icon */}
-      <div id="icon">
-        <img src="img/icon.png" alt="Icon" />
-      </div>
-
-      <Nav />
+      <Nav instance= {instance} />
     </header>
   );
 }
