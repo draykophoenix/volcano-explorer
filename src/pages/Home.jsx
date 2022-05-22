@@ -10,10 +10,8 @@ export default function Home() {
   );
 }
 
-// hero content
 const Hero = () => (
   <section className="hero">
-    {/* content for the hero */}
     <div className="hero_content">
       <h1 className="hero_title">Volcano Explorer</h1>
       <p className="hero_subtitle">Explore the world</p>

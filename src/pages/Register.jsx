@@ -8,7 +8,7 @@ import { register } from "../auth";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [response, setResponse] = useState("");
+
 
   return (
     <div className="Page">
@@ -44,7 +44,7 @@ export default function Register() {
           />
         </FormGroup>
         <FormGroup>
-          <Button id="register_button" onClick={() => setResponse(register(email, password))}>Register</Button>
+          <Button id="register_button" onClick={() => register(email, password)}>Register</Button>
           <UncontrolledPopover
             target="register_button"
             trigger="focus"
