@@ -26,9 +26,7 @@ export default function Register() {
             onChange={(event) => {
               setEmail(event.target.value); 
             }} 
-          >
-            Email
-          </Input>
+          />
         </FormGroup>
         <FormGroup>
           <Label for="password">Password:</Label>
@@ -42,9 +40,7 @@ export default function Register() {
             onChange={(event) => {
               setPassword(event.target.value); 
             }} 
-          >
-            Email
-          </Input>
+          />
         </FormGroup>
         <Button onClick={() => register(email, password)}>Register</Button>
       </Form>

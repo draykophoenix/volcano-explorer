@@ -11,8 +11,13 @@ import Register from "./pages/Register"
 import Login from "./pages/Login"
 
 export default function App() {
-  const [instance, setInstance] = useState(localStorage.getItem("instance"));
-  console.table(localStorage.getItem("instance"))
+  let stored_instance = localStorage.getItem("instance");
+  let initial_instance = (stored_instance === null ?
+     {email: "", token: ""} 
+     :
+      JSON.parse(stored_instance))
+
+  const [instance, setInstance] = useState(initial_instance);
 
   return (
     <div className="App">

@@ -26,9 +26,7 @@ export default function Login( {setInstance} ) {
             onChange={(event) => {
               setEmail(event.target.value); 
             }} 
-          >
-            Email
-          </Input>
+          />
         </FormGroup>
         <FormGroup>
           <Label for="password">Password:</Label>
@@ -42,9 +40,7 @@ export default function Login( {setInstance} ) {
             onChange={(event) => {
               setPassword(event.target.value); 
             }} 
-          >
-            Email
-          </Input>
+          />
         </FormGroup>
         <Button onClick={() => login(email, password, setInstance)}>Login</Button>
       </Form>

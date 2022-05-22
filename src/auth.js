@@ -10,7 +10,7 @@ export function login (email, password, setInstance) {
     })
     .then(res => res.json())
     .then(res => {
-        localStorage.setItem("instance", { token: res.token, email: email });
+        localStorage.setItem("instance", JSON.stringify({ token: res.token, email: email }));
         setInstance({ token: res.token, email: email });
     })
 }
