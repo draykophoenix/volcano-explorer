@@ -126,3 +126,14 @@ h1 {
       flex: 1 100%;
     }
   }
+
+.inline_container {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+#data {
+  width: 40%;
+  text-align: left;
+}

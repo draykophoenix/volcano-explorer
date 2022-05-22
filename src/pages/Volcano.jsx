@@ -1,6 +1,9 @@
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+import { Map, Marker } from "pigeon-maps";
+import { stamenTerrain } from 'pigeon-maps/providers'
+
 import { Button, ListGroup, ListGroupItem } from "reactstrap";
 import { useVolcanoData } from "../api";
 
@@ -12,15 +15,23 @@ export default function Volcano() {
     const {loading: volcanoDataLoading, volcanoData, error: volcanoDataError} = useVolcanoData(id);
 
     return (
-        <div>
-        <h1>{volcanoData.name}</h1>
+        <div className="page">
+            <h1>{volcanoData.name}</h1>
             <div className="container">
-
-                {volcanoDataLoading ? (
-                    <p>Loading ...</p>
-                ) : (
-                    <VolcanoInformation {...volcanoData}/>
-                ) }
+                <div className="inline_container">
+                    {volcanoDataLoading ? (
+                        <p>Loading ...</p>
+                    ) : (
+                        <div>
+                            <div id="map">
+                            <VolcanoMap {...volcanoData}/>
+                            </div>
+                            <div id="data">
+                            <VolcanoInformation {...volcanoData}/>
+                            </div>
+                        </div>
+                    )}
+                </div>
 
                 <Button
                     color="secondary"
@@ -47,5 +58,17 @@ function VolcanoInformation ({ country, region, subregion, last_eruption, summit
                 <ListGroupItem>Elevation: {elevation}</ListGroupItem>
             </ListGroup>
         </div>
+    )
+}
+
+function VolcanoMap ( {latitude, longitude}) {
+return (
+    <Map 
+        height={300}
+        defaultCenter={[latitude, longitude]}
+        defaultZoom={7}
+    >
+        <Marker width={50} anchor={[latitude, longitude]} />
+    </Map>
     )
 }
