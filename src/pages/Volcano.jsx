@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Map, Marker } from "pigeon-maps";
-import { stamenTerrain } from 'pigeon-maps/providers'
 
 import { Button } from "reactstrap";
 import { useVolcanoData } from "../api";
