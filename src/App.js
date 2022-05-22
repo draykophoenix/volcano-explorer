@@ -16,7 +16,7 @@ export default function App() {
      {email: "", token: ""} 
      :
       JSON.parse(stored_instance))
-  console.log(initial_instance)
+
   const [instance, setInstance] = useState(initial_instance);
 
   return (

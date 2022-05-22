@@ -134,6 +134,40 @@ h1 {
 }
 
 #data {
-  width: 40%;
-  text-align: left;
+  vertical-align: top;
 }
+
+#data ul {
+  list-style: none;
+  text-decoration: none;
+  padding: 5px;
+  border: 3px solid var(--lavared);
+  border-radius: 4px;
+  background-color: var(--ashmedwhite);
+  width: 90%;
+  color: var(--rockgrey);
+}
+
+#data, #chart {
+  display: inline-block;
+  width: 50%;
+  text-align: left;
+  margin:0;
+}
+
+#map {
+  border: 1px solid var(--ashmedwhite);
+  border-radius: 4px;
+  background-color: var(--lavared);
+  margin-bottom: 4px;
+}
+
+#chart_heading {
+  font-family: "Merriweather", serif;
+  text-align: right;
+  width: 80%;
+  display: inline-block;
+  margin: 4px;
+}
+
+
