@@ -9,6 +9,8 @@ import "./App.css";
 import "./constant/constant.css";
 import "./pages/pages.css";
 
+export const API_URL = `http://sefdb02.qut.edu.au:3001`;
+
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <React.StrictMode>

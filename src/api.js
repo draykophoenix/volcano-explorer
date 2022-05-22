@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import { API_URL } from ".";
 
 export function useCountries () {
     const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ export function useCountries () {
 }
 
 function getCountries() {
-  const url = `http://sefdb02.qut.edu.au:3001/countries`
+  const url = `${API_URL}/countries`
   return (
     fetch(url)
       .then(res => res.json())
@@ -42,7 +43,7 @@ export function useVolcanoList(country) {
 }
 
 function getVolcanoListByQuery(country) {
-    const url = `http://sefdb02.qut.edu.au:3001/volcanoes/?country=${country}`
+    const url = `${API_URL}/volcanoes/?country=${country}`
 
     return(
       fetch(url)
@@ -78,7 +79,7 @@ export function useVolcanoData(id) {
 }
 
 function getVolcanoDataByQuery(id) {
-    const url = `http://sefdb02.qut.edu.au:3001/volcano/${id}`
+    const url = `${API_URL}/volcano/${id}`
 
     return(
       fetch(url)

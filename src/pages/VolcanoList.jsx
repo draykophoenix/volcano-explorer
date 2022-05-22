@@ -8,6 +8,7 @@ import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-balham-dark.css";
 
 import { useCountries, useVolcanoList } from "../api";
+import { API_URL } from "..";
 
 export default function VolcanoList() {
   // Countries for the input box 
@@ -16,7 +17,7 @@ export default function VolcanoList() {
   const [selectedCountry, setSelectedCountry] = useState("");
 
   return (
-  <div>
+  <div className="Page">
     <h1>Volcanos</h1>
     <div className="container">
 
@@ -30,8 +31,8 @@ export default function VolcanoList() {
               id="country"
               name="country"
               type="select"
-              value={selectedCountry}
               placeholder="Country"
+              value={selectedCountry}
               onChange={(event) => {
                 setSelectedCountry(event.target.value); 
               }} 
@@ -52,12 +53,12 @@ export default function VolcanoList() {
         color="secondary"
         size="sm"
         className="mt-3"
-        href="http://sefdb02.qut.edu.au:3001/"
+        href= {API_URL}
         target="_blank"
         >
           Go to Volcano API
       </Button>
-  </div>
+    </div>
   </div>
   );
 }

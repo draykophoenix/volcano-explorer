@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <main>
+    <div className="home-page">
       <Hero />
       <Features />
-    </main>
+    </div>
   );
 }
 
