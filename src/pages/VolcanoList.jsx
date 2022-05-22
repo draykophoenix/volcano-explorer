@@ -15,6 +15,7 @@ export default function VolcanoList() {
   const {loading: countriesLoading, countries, error: countriesError} = useCountries();
   //
   const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedPopulated, setSelectedPopulated] = useState("");
 
   return (
   <div className="Page">
@@ -24,26 +25,52 @@ export default function VolcanoList() {
       {countriesLoading ? (
         <p>Loading... </p>
       ) : (
-        <Form inline>
-          <FormGroup floating>
-            <Input
-              className="input"
-              id="country"
-              name="country"
-              type="select"
-              placeholder="Country"
-              value={selectedCountry}
-              onChange={(event) => {
-                setSelectedCountry(event.target.value); 
-              }} 
-            >
-              <option value={""}></option>
-              {countries.map((country) => (
-              <option key={country}>{country}</option>
-              ))}
-            </Input>
-            <Label for="country">Country</Label>
-          </FormGroup>
+        <Form>
+          <div id="country_block">
+            <FormGroup floating>
+              <Input
+                className="input"
+                id="country"
+                name="country"
+                type="select"
+                placeholder="Country"
+                value={selectedCountry}
+                onChange={(event) => {
+                  setSelectedCountry(event.target.value); 
+                }} 
+              >
+                <option value={""}></option>
+                {countries.map((country) => (
+                <option key={country}>{country}</option>
+                ))}
+              </Input>
+              <Label for="country">Country</Label>
+            </FormGroup>
+          </div>
+          
+          <div id="populated_block">
+            <FormGroup>
+              <Label id= "input_label" for="populated">Populated within</Label>
+              <Input
+                disabled={(localStorage.getItem("instance") === null)}
+                className="input"
+                id="populated"
+                name="populated"
+                type="select"
+                placeholder="Populated within"
+                value={selectedPopulated}
+                onChange={(event) => {
+                  setSelectedPopulated(event.target.value); 
+                }} 
+              >
+                <option value={null}>Any</option>
+                <option value={5}>5km</option>
+                <option value={10}>10km</option>
+                <option value={30}>30km</option>
+                <option value={100}>100km</option>
+              </Input>
+            </FormGroup>
+          </div>
         </Form>
       )}
 
