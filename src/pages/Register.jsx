@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Input, Form, FormGroup, Label, Button } from "reactstrap";
+import { Input, Form, FormGroup, Label, Button, UncontrolledPopover, PopoverBody, PopoverHeader } from "reactstrap";
 
 import { register } from "../auth";
 
@@ -8,13 +8,14 @@ import { register } from "../auth";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [response, setResponse] = useState("");
 
   return (
     <div className="Page">
       <h1>Register</h1>;
       <div className="container">
       <Form>
-        <FormGroup>
+        <FormGroup className="position-relative">
           <Label for="email">Email:</Label>
           <Input
             className="input"
@@ -42,7 +43,20 @@ export default function Register() {
             }} 
           />
         </FormGroup>
-        <Button onClick={() => register(email, password)}>Register</Button>
+        <FormGroup>
+          <Button id="register_button" onClick={() => setResponse(register(email, password))}>Register</Button>
+          <UncontrolledPopover
+            target="register_button"
+            trigger="focus"
+          >
+            <PopoverHeader>
+              Registration
+            </PopoverHeader>
+            <PopoverBody>
+              User may have been registered :{")"}
+            </PopoverBody>
+        </UncontrolledPopover>
+      </FormGroup>
       </Form>
       </div>
     </div>

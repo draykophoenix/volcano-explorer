@@ -43,6 +43,11 @@ export default function Login( {setInstance} ) {
           />
         </FormGroup>
         <Button onClick={() => login(email, password, setInstance)}>Login</Button>
+        <br></br>
+        <Button id="logout" onClick={() => {
+          localStorage.removeItem("instance");
+          setInstance({email: "", token: ""});
+        }}>Log out</Button>
       </Form>
       </div>
     </div>

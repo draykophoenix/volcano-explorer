@@ -18,11 +18,11 @@ export function login (email, password, setInstance) {
 export function register (email, password) {
     const url = `${API_URL}/user/register`;
 
-    return fetch(url, {
+    return (fetch(url, {
         method: "POST",
         headers: { accept: "application/json", "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, password: password})
     })
     .then(res => res.json())
-    .then(res => console.log(res))
+    )
 }
