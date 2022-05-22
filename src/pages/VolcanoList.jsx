@@ -63,18 +63,18 @@ export default function VolcanoList() {
                   setSelectedPopulated(event.target.value); 
                 }} 
               >
-                <option value={null}>Any</option>
-                <option value={5}>5km</option>
-                <option value={10}>10km</option>
-                <option value={30}>30km</option>
-                <option value={100}>100km</option>
+                <option value="">Any</option>
+                <option>5km</option>
+                <option>10km</option>
+                <option>30km</option>
+                <option>100km</option>
               </Input>
             </FormGroup>
           </div>
         </Form>
       )}
 
-      <VolcanoTable selectedCountry= {selectedCountry}/>
+      <VolcanoTable selectedCountry= {selectedCountry} selectedPopulated = {selectedPopulated}/>
 
       <Button
         color="secondary"
@@ -92,7 +92,7 @@ export default function VolcanoList() {
 
   
 
-  function VolcanoTable ( {selectedCountry = []} ) {
+  function VolcanoTable ( {selectedCountry, selectedPopulated } ) {
   // Volcano data for rows in the volcano table
   const {volcanoListLoading, volcanoList, volcanoListError} = useVolcanoList(selectedCountry);
   // Allows table to navigate with React Router
@@ -124,7 +124,7 @@ export default function VolcanoList() {
         rowData={volcanoList}
         pagination= {true} 
         paginationPageSize= {7}
-        onRowClicked={(row) => navigate(`./volcano?id=${row.data.id}`)}
+        onRowClicked={(row) => navigate(`./volcano?id=${row.data.id}${(selectedPopulated === "") ? "" : `populatedWithin=${selectedPopulated}`}`)}
       />
     </div>
   </div>
