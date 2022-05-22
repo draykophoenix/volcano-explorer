@@ -52,7 +52,6 @@ export default function VolcanoList() {
             <FormGroup>
               <Label id= "input_label" for="populated">Populated within</Label>
               <Input
-                disabled={(localStorage.getItem("instance") === null)}
                 className="input"
                 id="populated"
                 name="populated"
@@ -94,7 +93,7 @@ export default function VolcanoList() {
 
   function VolcanoTable ( {selectedCountry, selectedPopulated } ) {
   // Volcano data for rows in the volcano table
-  const {volcanoListLoading, volcanoList, volcanoListError} = useVolcanoList(selectedCountry);
+  const {volcanoListLoading, volcanoList, volcanoListError} = useVolcanoList(selectedCountry, selectedPopulated);
   // Allows table to navigate with React Router
   const navigate = useNavigate();
 
@@ -124,7 +123,7 @@ export default function VolcanoList() {
         rowData={volcanoList}
         pagination= {true} 
         paginationPageSize= {7}
-        onRowClicked={(row) => navigate(`./volcano?id=${row.data.id}${(selectedPopulated === "") ? "" : `populatedWithin=${selectedPopulated}`}`)}
+        onRowClicked={(row) => navigate(`./volcano?id=${row.data.id}${(selectedPopulated === "") ? "" : `&populatedWithin=${selectedPopulated}`}`)}
       />
     </div>
   </div>

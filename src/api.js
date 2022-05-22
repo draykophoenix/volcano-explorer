@@ -25,40 +25,57 @@ function getCountries() {
   )
 }
 
-export function useVolcanoList(country) {
+export function useVolcanoList(country, populatedWithin) {
   const [loading, setLoading] = useState(true);
   const [volcanoList, setVolcanoList] = useState([]);
 
   useEffect(() => {
     if (country != "") {
-      getVolcanoListByQuery(country)
+      getVolcanoListByQuery(country, populatedWithin)
         .then((volcanoList) => {
           setVolcanoList(volcanoList);
         })
         .then(() => setLoading(false));
     }
-  }, [country]);
+  }, [country, populatedWithin]);
 
   return { loading, volcanoList, error:null };
 }
 
-function getVolcanoListByQuery(country) {
+function getVolcanoListByQuery(country, populatedWithin) {
     const url = `${API_URL}/volcanoes/?country=${country}`
 
-    return(
-      fetch(url)
-        .then(res => res.json())
-        .then(data =>
-          data.map(volcano => {
-            return {
-              id: volcano.id,
-              name: volcano.name,
-              region: volcano.region,
-              subregion: volcano.subregion,
-            };
-          })
-        )
-    )
+    if (populatedWithin === null) {
+      return(
+        fetch(url)
+          .then(res => res.json())
+          .then(data =>
+            data.map(volcano => {
+              return {
+                id: volcano.id,
+                name: volcano.name,
+                region: volcano.region,
+                subregion: volcano.subregion,
+              };
+            })
+          )
+      )
+    } else {
+      return(
+        fetch(`${url}&populatedWithin=${populatedWithin}`)
+          .then(res => res.json())
+          .then(data =>
+            data.map(volcano => {
+              return {
+                id: volcano.id,
+                name: volcano.name,
+                region: volcano.region,
+                subregion: volcano.subregion,
+              };
+            })
+          )
+      )
+    }
 }
 
 export function useVolcanoData(id) {
@@ -71,7 +88,7 @@ export function useVolcanoData(id) {
         .then((volcanoData) => {
           setVolcanoData(volcanoData);
         })
-        .then(() => setLoading(false));
+        .then(() => setLoading(false))
     }
   }, [id]);
 
@@ -80,10 +97,23 @@ export function useVolcanoData(id) {
 
 function getVolcanoDataByQuery(id) {
     const url = `${API_URL}/volcano/${id}`
+    let instance = JSON.parse(localStorage.getItem("instance"));
 
-    return(
-      fetch(url)
-        .then(res => res.json())
-    )
+    if (instance === null) {
+      return(
+        fetch(url)
+          .then(res => res.json())
+      )
+    } else {
+      const headers = {
+        accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${instance.token}`
+      }
+      return(
+        fetch(url, { headers })
+          .then(res => res.json())
+      )
+    }
+
 }
-

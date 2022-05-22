@@ -8,11 +8,8 @@ export default function Volcano() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
-    const populatedWithin = searchParams.get("populatedWithin");
-    confirm
 
-
-    const {loading: volcanoDataLoading, volcanoData, error: volcanoDataError} = useVolcanoData(id, populatedWithin);
+    const {loading: volcanoDataLoading, volcanoData, error: volcanoDataError} = useVolcanoData(id);
 
     return (
         <div>
