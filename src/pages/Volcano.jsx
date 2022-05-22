@@ -8,9 +8,11 @@ export default function Volcano() {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
+    const populatedWithin = searchParams.get("populatedWithin");
+    confirm
 
 
-    const {loading: volcanoDataLoading, volcanoData, error: volcanoDataError} = useVolcanoData(id);
+    const {loading: volcanoDataLoading, volcanoData, error: volcanoDataError} = useVolcanoData(id, populatedWithin);
 
     return (
         <div>
@@ -36,7 +38,7 @@ export default function Volcano() {
     );
 }
 
-function VolcanoInformation ({ name, country, region, subregion, last_eruption, summit, elevation}) {
+function VolcanoInformation ({ country, region, subregion, last_eruption, summit, elevation}) {
     return(
         <div>
             <ListGroup type="unstyled">
